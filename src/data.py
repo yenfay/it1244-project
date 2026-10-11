@@ -24,3 +24,9 @@ def txt_to_csv(raw_dir, out_dir):
 
 if __name__ == '__main__':
     txt_to_csv(raw_dir, out_dir)
+
+# load_walk(file): returns the 19 named columns.
+# parse_name(file): returns study, group, subject and walk number.
+# load_metadata(): applies the §1 fixes, adds a label column (1 = PD), and gives the columns short names.
+# list_walks(): one row per file, filtered to normal walks.
+# make_splits(): StratifiedGroupKFold grouped by subject, saved once to splits.json for both tasks. Task 2 folds use only PD patients with UPDRSM, so SiPt02 and SiPt07 are excluded.
