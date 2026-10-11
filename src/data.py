@@ -1,25 +1,33 @@
 #convert txt to csv with headers. in processed data
 import os
 import pandas as pd
+from pathlib import Path
 
 col_names = (["time"]
         + [f"L{i}" for i in range(1, 9)]
         + [f"R{i}" for i in range(1, 9)]
         + ["L_total", "R_total"])
 
-from pathlib import Path
-
 ROOT = Path(__file__).resolve().parent.parent   
 raw_dir = ROOT / "data" / "raw"
 out_dir = ROOT / "data" / "processed"
 
+#load(file) returns each walking file as a df
+def load(file):
+    file = str(file)
+    if file.endswith('txt'):
+        return pd.read_csv(file, sep=r'\s+', header = None, names=col_names)
+    return pd.read_csv(file)
+
 def txt_to_csv(raw_dir, out_dir):
-    os.makedirs(out_dir, exist_ok=True)
-    for file in os.listdir(raw_dir):
-        if not file.endswith(".txt"):
+    os.make_dirs(out_dir, exist_ok=True)
+    for file in sorted(os.listdir(raw_dir)):
+        if not file.endswith('.txt'):
             continue
-        df = pd.read_csv(os.path.join(raw_dir, file), sep=r"\s+", header=None, names=col_names)
-        df.to_csv(os.path.join(out_dir, file.replace(".txt", ".csv")), index=False)
+        df = load(os.path.join(raw_dir, file))
+        df.to_csv(os.path.join(raw_dir, file.replace('.txt', '.csv')), index=False)
+
+
 
 
 if __name__ == '__main__':
