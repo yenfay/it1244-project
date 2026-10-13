@@ -1,4 +1,5 @@
 # it1244-project
 
 ### Task 1: Classify patient based on presence/absence of Parkinson's disease. Since there are so many features not all may be necessary.
+
 ### Task 2: In the second task, there are several metrics that you could predict. (e.g., UPDRSM, HoehnYahr) Is there a metric that your model could predict much better than others? Why is that so? You are encouraged to determine how these metrics quantify the severity of Parkinson's.
