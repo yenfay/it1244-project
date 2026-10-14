@@ -1,3 +1,4 @@
+# based on the eda findings, running this file gives processed data (both walk files and metadata)
 import os
 import json
 import pandas as pd
@@ -11,13 +12,23 @@ col_names = (["time"]
 
 ROOT = Path(__file__).resolve().parent.parent
 raw_dir = ROOT / "data" / "raw"
-metadata_dir = ROOT/ 'data' / 'others' / "subject_metadata.xls"
+out_dir = ROOT / "data" / "processed"
+metadata_dir = ROOT/ 'data' / 'raw'/ 'others' / "subject_metadata.xls"
 
 def load(file):
     file = str(file)
     if file.endswith('txt'):
         return pd.read_csv(file, sep=r'\s+', header=None, names=col_names)
     return pd.read_csv(file)
+
+def txt_to_csv(raw_dir, out_dir):
+    os.makedirs(out_dir, exist_ok=True)
+    for file in sorted(os.listdir(raw_dir)):
+        if not file.endswith('_01.txt'):
+            continue
+        df = load(os.path.join(raw_dir, file))
+        df.to_csv(os.path.join(out_dir, file.replace('.txt', '.csv')), index=False)
+    load_metadata().to_csv(os.path.join(out_dir, 'subject_metadata.csv'), index=False)
 
 def parse_file_name(file):
     # GaCo01_02.txt gives {study: "Ga", group: "Co", subject: "GaCo01", walk: 2}
@@ -30,11 +41,13 @@ def load_metadata():
     metadata = metadata.drop(metadata[(metadata['Study'] == 'Ju') & (metadata['Group'] == 'CO') & (metadata['Subjnum'] == 10)].index)
     metadata.loc[metadata['Study'] == 'Ju', 'Height (meters)'] /= 100
     metadata['Group'] = metadata['Group'].replace({'PD': 'Pt', 'CO': 'Co'})
+    for col in ['Weight (kg)', 'Height (meters)', 'TUAG', 'Speed_01 (m/sec)']:
+        metadata[col] = metadata[col].fillna(metadata[col].median())
     return metadata.reset_index(drop=True)
 
 def list_walks():
-    files = sorted(f for f in os.listdir(raw_dir) if f.endswith('_01.txt'))
-    return pd.DataFrame([{'file': str(raw_dir / f), **parse_file_name(f)} for f in files])
+    files = sorted(f for f in os.listdir(out_dir) if f.endswith('_01.csv'))
+    return pd.DataFrame([{'file': str(out_dir / f), **parse_file_name(f)} for f in files])
 
 #used for k-fold cross validation (Task 1)
 
@@ -68,5 +81,5 @@ def splits():
         json.dump(result, f, indent=2)
 
 if __name__ == '__main__':
+    txt_to_csv(raw_dir, out_dir)
     splits()
-
