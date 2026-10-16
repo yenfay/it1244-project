@@ -49,8 +49,8 @@ def list_walks():
     files = sorted(f for f in os.listdir(out_dir) if f.endswith('_01.csv'))
     return pd.DataFrame([{'file': str(out_dir / f), **parse_file_name(f)} for f in files])
 
-#used for k-fold cross validation (Task 1)
 
+#used for k-fold cross validation (Task 1)
 def splits():
     # decides once which subjects are test/which go in each CV fold
     metadata = load_metadata()   # one row per subject
