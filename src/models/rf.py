@@ -2,35 +2,52 @@
 from pathlib import Path
 import numpy as np 
 import joblib
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 
 # create model 
-def make_random_forest(random_state=42, n_estimators=200, min_samples_leaf=2):
-    return Pipeline([
-        ('imputer', SimpleImputer(strategy='median', keep_empty_features=True)), 
-        ('model', RandomForestRegressor(
+def make_random_forest(random_state=42, n_estimators=200, 
+                       min_samples_leaf=2, task="regression"):
+    
+    if task == "classification": # random forest supports classification for task 1
+        model = RandomForestClassifier(
             n_estimators=n_estimators,
             min_samples_leaf=min_samples_leaf,
             random_state=random_state,
-            n_jobs=-1,
+            n_jobs=-1
+        )
+
+    elif task == "regression": # random forest supports regression for task 2
+        model = RandomForestRegressor(
+            n_estimators=n_estimators,
+            min_samples_leaf=min_samples_leaf,
+            random_state=random_state,
+            n_jobs=-1
+        )
+        
+    else: 
+        raise ValueError("Task must be 'classification' or 'regression'.")
+
+    return Pipeline([
+        ("imputer", SimpleImputer(
+            strategy="median",
+            keep_empty_features=True
         )),
+        ("model", model)
     ])
 
 # train model and save the output 
 def train_and_save_model(X_train, y_train, model_path, random_state=42,
-                         n_estimators=200, min_samples_leaf=2):
-    
-    # check input
-    assert len(X_train) == len(y_train), 'X_train and y_train row counts differ.' 
-    assert len(X_train) > 0, 'Cannot train on an empty training set.' 
+                         n_estimators=200, min_samples_leaf=2, task="regression"):
     
     # create random forest pipeline 
-    model = make_random_forest(random_state, n_estimators, min_samples_leaf)
+    model = make_random_forest(random_state, n_estimators, min_samples_leaf, task=task)
     
     # train using training data and predict model 
     model.fit(X_train, y_train)
+    
+    # predict 
     predictions = model.predict(X_train)
     
     # ensure prediction not invalid

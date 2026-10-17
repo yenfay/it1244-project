@@ -1,6 +1,7 @@
 # reason for using stride: as shown in boxplot in eda, total duration of walk files varies
 # reason for using only 01 walks: consistency in walk condition also shown in eda
 # reason for using CV instead of Standard deviation to measure irregularity: CV is SD but relative to the average. So basically irregularity relative to each persons pace. Highlighted in reference papers as well.
+
 import numpy as np
 import pandas as pd
 from data import load, load_metadata, list_walks
@@ -49,6 +50,9 @@ rows = {}
 for _, w in list_walks().iterrows():
     rows[w['subject']] = walk_features(load(w['file']), metadata.loc[w['subject'], 'Weight (kg)'])
 
+# build table X, contains one row per subject
 X = pd.DataFrame.from_dict(rows, orient='index')
 y = (metadata.loc[X.index, 'Group'] == 'Pt').astype(int)
 
+print(X)
+print(y)
