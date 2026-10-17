@@ -1,4 +1,5 @@
 # 1D-CNN with classification + regression heads
+import tensorflow 
 from tensorflow.keras import Sequential, Input
 from tensorflow.keras.layers import (
     Conv1D,

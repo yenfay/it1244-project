@@ -4,7 +4,7 @@
 
 import numpy as np
 import pandas as pd
-from data import load, load_metadata, list_walks
+from src.data import load, load_metadata, list_walks
 
 threshold = 20
 
