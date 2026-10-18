@@ -53,6 +53,3 @@ for _, w in list_walks().iterrows():
 # build table X, contains one row per subject
 X = pd.DataFrame.from_dict(rows, orient='index')
 y = (metadata.loc[X.index, 'Group'] == 'Pt').astype(int)
-
-print(X)
-print(y)
