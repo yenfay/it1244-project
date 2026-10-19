@@ -1,0 +1,8 @@
+Model,Accuracy change (%),F1 change (%),ROC-AUC change (%)
+Logistic regression,33.78,7.51,60.2
+Logistic regression (tuned),33.78,7.51,60.2
+1D-CNN (tuned),21.62,0.22,56.59
+1D-CNN,21.62,-0.85,55.82
+Random forest (tuned),31.08,6.93,52.84
+Random forest,29.73,4.87,51.97
+Majority baseline,0.0,0.0,0.0
