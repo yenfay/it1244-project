@@ -1,4 +1,4 @@
-# Logistic regression - Task 1 baseline
+# Logistic regression Task 1 
 
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
