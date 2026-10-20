@@ -1,0 +1,15 @@
+subject,fold,actual_HoehnYahr,predicted_HoehnYahr
+GaPt05,3,2.5,2.25
+GaPt06,3,2.0,2.25
+GaPt07,3,3.0,2.25
+GaPt26,3,2.5,2.25
+JuPt04,3,2.5,2.25
+JuPt06,3,2.5,2.25
+JuPt15,3,2.5,2.25
+JuPt16,3,2.0,2.25
+JuPt19,3,2.0,2.25
+SiPt05,3,2.5,2.25
+SiPt09,3,2.0,2.25
+SiPt22,3,2.0,2.25
+SiPt31,3,2.0,2.25
+SiPt33,3,2.0,2.25
