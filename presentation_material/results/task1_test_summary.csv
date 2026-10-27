@@ -1,0 +1,8 @@
+Model,Accuracy,F1,ROC-AUC
+Majority baseline,0.5758,0.7308,0.5
+Logistic regression,0.6667,0.7027,0.7068
+Random forest,0.6061,0.6829,0.6805
+1D-CNN,0.8182,0.8235,0.8383
+Logistic regression (tuned),0.6667,0.7027,0.7068
+Random forest (tuned),0.697,0.75,0.7594
+1D-CNN (tuned),0.7879,0.8,0.7857

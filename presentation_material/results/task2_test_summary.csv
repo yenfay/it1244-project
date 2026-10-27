@@ -1,0 +1,15 @@
+Target,Model,MAE,RMSE
+UPDRSM,Mean baseline,5.0965,6.2588
+UPDRSM,MLR,5.2488,6.069
+UPDRSM,Random forest,4.4541,5.4194
+UPDRSM,1D-CNN,5.0363,5.9698
+UPDRSM,Random forest (tuned),4.765,5.5852
+UPDRSM,1D-CNN (tuned),5.0363,5.9698
+HoehnYahr,Mean baseline,0.3308,0.3759
+HoehnYahr,MLR,0.2688,0.3342
+HoehnYahr,Random forest (tuned),0.2597,0.3314
+HoehnYahr,1D-CNN (tuned),0.3795,0.4839
+UPDRS,Mean baseline,8.9232,10.175
+UPDRS,MLR,8.6169,9.8888
+UPDRS,Random forest (tuned),7.5219,8.7805
+UPDRS,1D-CNN (tuned),9.2349,10.2645
