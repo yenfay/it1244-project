@@ -5,11 +5,12 @@
 
 ## Project structure
 ```
-data/raw/                  walk files (.txt) + others/subject_metadata.xls
+data/raw/                  walk files (.txt), others/subject_metadata.xls
 data/splits.json           fixed test set and 5 CV folds (do not edit)
 src/                       data loading (data.py), features (features.py), models (models/)
 notebooks/                 eda, task1_classification, task2_severity, results
 presentation_material/     saved predictions, model weights and result tables
+references_material/       the stuff we cite in our report
 ```
 
 ## 1. Set up the environment
