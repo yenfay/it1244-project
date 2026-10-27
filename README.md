@@ -21,9 +21,9 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Check the version with `python --version` (it should show 3.12.x).
+Check the version with `python --version` (it should show 3.12.x). Google says its the best for CNN modelling apparently.
 
-## 2. Select the kernel
+## 2. Select the kernelgit 
 Open the project folder in VS Code (or Jupyter). In every notebook, choose the `.venv (Python 3.12.x)` kernel:
 - **VS Code:** click the kernel name (top right) → Select Another Kernel → Python Environments → `.venv`.
 
